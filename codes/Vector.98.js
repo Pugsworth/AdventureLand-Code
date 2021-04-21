@@ -7,8 +7,8 @@ class Vector {
     static LEFT  = new Vector(-1.0, 0.0);
 
     constructor(x, y) {
-        if (x != null) { x = 0.0; }
-        if (y != null) { y = x; }
+        if (x == null) { x = 0.0; }
+        if (y == null) { y = x; }
         this.x = x;
         this.y = y;
     }

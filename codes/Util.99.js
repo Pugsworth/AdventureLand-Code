@@ -9,32 +9,22 @@ var Util = {
 			setTimeout(circle.destroy.bind(circle), timeoutms);
 		},
 		drawCross: (x, y, radius, size, color, timeoutms=1000) => {
-			let line1 = draw_line();
-			let line2 = draw_line();
+			let unit = 0.7071067811865475; // magic size of 45deg angle: Math.sqrt(2) / 2; = vector(1, 1).normalize() = vector(0.707, 0.707)
+			let hsize = size/2;
+			let v11 = new Vector(-unit*hsize+v.x, -unit*hsize+v.y);
+			let v12 = new Vector(unit*hsize+v.x, unit*hsize+v.y);
+			let v21 = new Vector(unit*hsize+v.x, -unit*hsize+v.y);
+			let v22 = new Vector(-unit*hsize+v.x, unit*hsize+v.y);
+			let line1 = draw_line(v11, v12);
+			let line2 = draw_line(v21, v22);
 			setTimeout(()=>{ line1.destroy(); line2.destroy(); }, timeoutms);
 		}
-	},
-	angleTo: (x1, y1, x2, y2) => {
-		return Math.atan2(y2 - y1, x2 - x1);
-	},
-	angToVec: (ang) => {
-		return {x:Math.cos(ang), y:Math.sin(ang)};
 	},
 	rad2deg: (rad) => {
 		return rad * (180 / Math.PI);
 	},
 	deg2rad: (deg) => {
 		deg * (Math.PI / 180);
-	},
-	vector: (x, y) => {
-		if (!x) x = 1.0
-		if (!y) y = x;
-		return {x:x, y:y};
-	},
-	distTo: (x1, y1, x2, y2) => {
-		let x = x2 - x1;
-		let y = y2 - y1;
-		return Math.sqrt(x*x + y*y);
 	},
 	randomPointOnCircle: (x, y, radius) => {
 		if (!x) x = character.x;
