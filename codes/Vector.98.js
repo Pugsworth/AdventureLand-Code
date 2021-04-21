@@ -89,6 +89,10 @@ class Vector {
         return this.divide(this.length());
     }
 
+    static length(x, y) {
+        return Math.sqrt(x * x + y * y);
+    }
+
     length() {
         return Math.sqrt(this.x * this.x + this.y * this.y);
     }
@@ -144,11 +148,10 @@ class Vector {
     rotate(origin, angle) {
       // x' = x cos(θ) - y sin(θ)
       // y' = x sin(θ) + y cos(θ)
-      let vox = this.x - origin.x;
-      let voy = this.y - origin.y;
-    	this.x += vox * Math.cos(angle) - voy * Math.sin(angle);
-    	this.y += vox * Math.sin(angle) + voy * Math.cos(angle);
-    	return this;
+        let length = Vector.length(origin.x-this.x, origin.y-this.y);
+        this.x = origin.x + Math.cos(angle) * length;
+        this.y = origin.y + Math.sin(angle) * length;
+        return this;
     }
 
     rotateBy(origin, angle) {
