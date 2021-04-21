@@ -24,7 +24,7 @@ var Util = {
 		return rad * (180 / Math.PI);
 	},
 	deg2rad: (deg) => {
-		deg * (Math.PI / 180);
+		return deg * (Math.PI / 180);
 	},
 	randomPointOnCircle: (x, y, radius) => {
 		if (!x) x = character.x;
