@@ -100,6 +100,7 @@ class Vector {
     toAngle() {
         return -Math.atan2(-this.y, this.x);
     }
+    
     angleTo(av) {
         return Math.acos(this.dot(av) / (this.length() * av.length()));
     }
@@ -113,6 +114,10 @@ class Vector {
     		return new Vector(obj.x, obj.y);
     	}
     	return Vector.ZERO.clone();
+    }
+
+    static fromAngle(a) {
+        return new Vector().fromAngle(a);
     }
 
     fromAngle(a) {
@@ -129,7 +134,7 @@ class Vector {
     	return new Vector(this.x, this.y);
     }
 
-    static lerp(v1, v2, percent) {
+    static lerpTo(v1, v2, percent) {
     	if (percent > 1) percent = 1;
     	let x = v1.x + (v2.x - v1.x) * percent;
     	let y = v1.y + (v2.y - v1.y) * percent;
@@ -165,13 +170,25 @@ class Vector {
       return this;
     }
 
+    static lengthSqr(x, y) {
+        return x*x+y*y;
+    }
+
     lengthSqr() {
     	return this.x*this.x + this.y*this.y;
+    }
+
+    static distance(x1, y1, x2, y2) {
+        return Math.hypot(x2-x1, y2-y1);
     }
 
     distance(v2) {
         return Math.hypot(v2.x-this.x, v2.y-this.y);
     	// return v2.clone().subtract(this).length();
+    }
+
+    static distanceSqr(x1, y1, x2, y2) {
+        return (x2-x1)^2 + (y2-y1)^2;
     }
 
     distanceSqr(v2) {
